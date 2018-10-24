@@ -12,7 +12,8 @@ export const login = ({ api }) => function* (action) {
   if (login.data.token) {
     token = login.data.token
     localStorage.setItem('token', token)
-
+    console.log('aqui');
+    
     const user = jwtDecode(token)
     yield put(ActionCreators.signinSuccess(user))
   } else {
@@ -41,13 +42,17 @@ export const createProfile = ({ api }) => function* (action){
   }
 }
 
-export const auth = ({ api }) => function* () {
+export const auth = ({ api, apiSwipe }) => function* () {
   const token = localStorage.getItem('token')
   if (token) {
     try {
       //const user = jwtDecode(token)
       const user = yield call(api.getUser, 'me')
       yield put(ActionCreators.authSuccess(user.data))
+
+      const data = yield call(apiSwipe.createAccount)
+      console.log(data, ' lol')
+
     } catch (err) {
       yield put(ActionCreators.authFailure('invalid token'))
     }
