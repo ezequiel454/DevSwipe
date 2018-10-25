@@ -1,9 +1,9 @@
 const swipe = require('@swp/swipe-sdk')
 
 const swp = swipe.init({
-  apiKey: process.env.apiKey,
-  secret: process.env.secret,
-  sandbox: process.env.sandbox
+  apiKey: "8069837431d5923e2ec9fbf73a2dff575ade7c960d415e64b9ddb8d1b00245d8",
+  secret: "215988195f72112a4e8163f125f1d74f0fec3d45feaf49e33670536e2fe969f0",
+  sandbox: true
 })
 
 const getOrganization = () => async (req, res) => {
@@ -30,7 +30,7 @@ const getAccounts = () => async (req, res) => {
   })
   .catch(({data, error}) => {
     res.send({
-      error: error,
+      error: error + ' here',
       msg: 'error'
     })
   })
@@ -84,7 +84,6 @@ const getPayment = () => async (req, res) => {
 }
 
 const createAccount = () => async(req, res) => {
-  console.log('aqui')
   await swp.createAccount()
   .then(data => {
     res.send({
@@ -100,9 +99,7 @@ const createAccount = () => async(req, res) => {
 }
 
 const createPayment = () => async(req, res) => {
-  const newPayment = req.body
-  
-  await swp.makePayment(newPayment)
+  await swp.makePayment(req.body)
   .then(data => {
     res.send({
       data: data
@@ -110,6 +107,7 @@ const createPayment = () => async(req, res) => {
   })
   .catch(({data, error}) => {
     res.send({
+      data: data,
       error: error,
       msg: 'error'
     })

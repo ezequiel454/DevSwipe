@@ -41,7 +41,6 @@ const remove = ({ db }) => async(req, res) => {
   const { user } = res.locals
   const { id } = req.params
   const run = await db('runs').select().where('id', id)
-console.log(user)
   if ((run.length === 0) || (user.role === 'user' && run[0].user_id !== user.id)) {
     res.status(401)
     res.send({ error: true })
