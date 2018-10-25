@@ -42,16 +42,13 @@ export const createProfile = ({ api }) => function* (action){
   }
 }
 
-export const auth = ({ api, apiSwipe }) => function* () {
+export const auth = ({ api }) => function* () {
   const token = localStorage.getItem('token')
   if (token) {
     try {
       //const user = jwtDecode(token)
       const user = yield call(api.getUser, 'me')
       yield put(ActionCreators.authSuccess(user.data))
-
-      const data = yield call(apiSwipe.createAccount)
-      console.log(data, ' lol')
 
     } catch (err) {
       yield put(ActionCreators.authFailure('invalid token'))

@@ -1,20 +1,19 @@
 const swipe = require('@swp/swipe-sdk')
 
 const swp = swipe.init({
-  apiKey: "71ad81f98fbbab22c9d74948d2899a65027208197291d11e2065c3a9c62fe1f0",
-  secret: "ZseM1XT7HnpxOq1wcfTrsZo4fbHHf2dUp9FH/lZ3umBCAHH+xf8la0UHCVBGoAYe"
+  apiKey: process.env.apiKey,
+  secret: process.env.secret,
+  sandbox: process.env.sandbox
 })
 
-const get = () => async (req, res) => {
-  console.log('chamou')
+const getOrganization = () => async (req, res) => {
   await swp.getOrganization()
     .then(data => {
       res.send({
         data: data
-        //x: res.organization.name
       })
     })
-    .catch(({data, error}) => {
+    .catch(({error}) => {
       res.send({
         error: error,
         msg: 'error'
@@ -22,6 +21,101 @@ const get = () => async (req, res) => {
     })
 }
 
+const getAccounts = () => async (req, res) => {
+  await swp.getAllAccounts()
+  .then(data => {
+    res.send({
+      data: data
+    })
+  })
+  .catch(({data, error}) => {
+    res.send({
+      error: error,
+      msg: 'error'
+    })
+  })
+}
+
+const getAccount = () => async (req, res) => {
+  let id = req.params.id
+  await swp.getAccount(id)
+  .then(data => {
+    res.send({
+      data: data
+    })
+  })
+  .catch(({data, error}) => {
+    res.send({
+      error: error,
+      msg: 'error'
+    })
+  })
+}
+
+const getAssets = () => async (req, res) => {
+  await swp.getAllAssets()
+    .then(data => {
+      res.send({
+        data: data
+      })
+    })
+    .catch(({error}) => {
+      res.send({
+        error: error,
+        msg: 'error'
+      })
+    })
+}
+
+const getPayment = () => async (req, res) => {
+  let id = req.params.id
+  await swp.getPayment(id)
+  .then(data => {
+    res.send({
+      data: data
+    })
+  })
+  .catch(({data, error}) => {
+    res.send({
+      error: error,
+      msg: 'error'
+    })
+  })
+}
+
+const createAccount = () => async(req, res) => {
+  console.log('aqui')
+  await swp.createAccount()
+  .then(data => {
+    res.send({
+      data: data
+    })
+  })
+  .catch(({data, error}) => {
+    res.send({
+      error: error,
+      msg: 'error'
+    })
+  })
+}
+
+const createPayment = () => async(req, res) => {
+  const newPayment = req.body
+  
+  await swp.makePayment(newPayment)
+  .then(data => {
+    res.send({
+      data: data
+    })
+  })
+  .catch(({data, error}) => {
+    res.send({
+      error: error,
+      msg: 'error'
+    })
+  })
+}
+
 module.exports = {
-  get
+  getOrganization, getAccounts, getAccount, getAssets, getPayment, createAccount, createPayment
 }

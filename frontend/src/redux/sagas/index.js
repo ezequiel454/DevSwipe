@@ -7,8 +7,6 @@ import { auth, login, destroyAuth, updateProfile, createProfile } from './auth'
 import { getUsers, removeUser, getUser, updateUser } from './users'
 import Api from '../../service/Api'
 
-import ApiSwipe from '../../service/ApiSwipe'
-
 export default function * rootSaga () {
   
   const devURL = 'http://localhost:3001'
@@ -16,14 +14,9 @@ export default function * rootSaga () {
   const baseURL = process.env.NODE_ENV === 'development' ? devURL : prodURL
   const api = new Api(baseURL)
   
-  const swipeURL = 'https://api.sandbox.swipetech.io'
-  const swipeProdURL = 'https://api.swipetech.io'
-
-  const apiSwipe = new ApiSwipe(swipeURL)
-
   yield all([
     takeLatest(Types.SIGNIN_REQUEST, login({ api })),
-    takeLatest(Types.AUTH_REQUEST, auth({ api, apiSwipe })),
+    takeLatest(Types.AUTH_REQUEST, auth({ api })),
     takeLatest(Types.GET_RUNS_REQUEST, getRuns({ api })),
     takeLatest(Types.CREATE_RUN_REQUEST, createRun({ api })),
     takeLatest(Types.REMOVE_RUN_REQUEST, removeRun({ api })),
