@@ -32,7 +32,9 @@ const Api = base => {
     getRuns: admin => get(`/runs/${admin}`),
     createRun: data => create(`/runs`, data),
 
-    login: user => login(`/users/login`, user)
+    login: user => login(`/users/login`, user),
+
+    getOrganization: () => get(`/swipe/organizations`),
 
   }
 }

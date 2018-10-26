@@ -12,7 +12,6 @@ export const login = ({ api }) => function* (action) {
   if (login.data.token) {
     token = login.data.token
     localStorage.setItem('token', token)
-    console.log('aqui');
     
     const user = jwtDecode(token)
     yield put(ActionCreators.signinSuccess(user))

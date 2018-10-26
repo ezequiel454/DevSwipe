@@ -53,7 +53,11 @@ export const {
   createProfileRequest: ['user'],
   createProfileSuccess: ['user'],
   createProfileFailure: ['error'],
-  createProfileReset: null
+  createProfileReset: null,
+
+  getOrganizationRequest: null,
+  getOrganizationSuccess: ['organization'],
+  getOrganizationFailure: null
 })
 export default Creators
 
