@@ -30,6 +30,14 @@ const initDB = async () => {
       table.integer('distance') // meters
     })
   }
+  const accountExist = await knex.schema.hasTable('account')
+  if (!runsExist) {
+    await knex.schema.createTable('user_account', table => {
+      table.increments('id').primary()
+      table.integer('user_id')
+      table.string('account_id')
+    })
+  }
   const totalUsers = await knex('users').select(knex.raw('count(*) as total'))
   if (totalUsers[0].total === 0) {
     await knex.insert({
