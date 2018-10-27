@@ -31,7 +31,7 @@ const initDB = async () => {
     })
   }
   const accountExist = await knex.schema.hasTable('user_account')
-  if (!runsExist) {
+  if (!accountExist) {
     await knex.schema.createTable('user_account', table => {
       table.increments('id').primary()
       table.integer('user_id')
