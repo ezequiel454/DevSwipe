@@ -35,7 +35,7 @@ const Api = base => {
     login: user => login(`/users/login`, user),
 
     getOrganization: () => get(`/swipe/organizations`),
-
+    getUserAccount: id => get(`/account/${id}`),
   }
 }
 

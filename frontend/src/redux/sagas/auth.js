@@ -47,6 +47,7 @@ export const auth = ({ api }) => function* () {
     try {
       //const user = jwtDecode(token)
       const user = yield call(api.getUser, 'me')
+
       yield put(ActionCreators.authSuccess(user.data))
 
     } catch (err) {

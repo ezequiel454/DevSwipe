@@ -57,7 +57,11 @@ export const {
 
   getOrganizationRequest: null,
   getOrganizationSuccess: ['organization'],
-  getOrganizationFailure: null
+  getOrganizationFailure: null,
+
+  getUserAccountRequest: ['id'],
+  getUserAccountSuccess: ['userAccount'],
+  getUserAccountFailure: null,
 })
 export default Creators
 

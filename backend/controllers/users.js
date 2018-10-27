@@ -26,6 +26,7 @@ const get = ({ db }) => async(req, res) => {
   }
 }
 const getMe = ({ db }) => async(req, res) => {
+  console.log(res, 'aqui');
   const userDB = await db('users').select().where('id', res.locals.user.id)
   res.send(userDB[0])
 }
