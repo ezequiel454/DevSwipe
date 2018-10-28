@@ -18,7 +18,6 @@ const Header = props => {
     <Menu>
       <Menu.Item as={Link} to='/'><Image src={'/logo.png'} size='small'/></Menu.Item>
       <Menu.Item as={Link} to='/'>Home</Menu.Item>
-      <Menu.Item as={Link} to='/admin'>Admin</Menu.Item>
       <Menu.Item as={Link} to='/create-account'>Create Account</Menu.Item>
       <Menu.Item as={Link} to='/login'>Login</Menu.Item>
     </Menu>
@@ -31,7 +30,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = () => {
   return {
     signin: (email, senha) => ActionCreators.signinRequest(email, senha)
   }

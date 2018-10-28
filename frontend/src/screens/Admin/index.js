@@ -5,6 +5,8 @@ import Header from './elements/Headers'
 import Runs from './Runs.js'
 import Users from './Users'
 import EditUser from './EditUser'
+import Organization from './Organization'
+
 
 const Home = props => <h1>Home admin</h1>
 
@@ -22,6 +24,7 @@ const Admin = props => {
         <Route exact path={`${props.match.path}/users/:id/edit`} component={EditUser} />
         <Route exact path={`${props.match.path}/users`} component={Users} />
         <Route path={`${props.match.path}/runs`} component={Runs} />
+        <Route exact path={`${props.match.path}/organization`} component={Organization} />
     </div>
   )
 }

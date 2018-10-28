@@ -5,7 +5,6 @@ const Api = base => {
     baseURL: base
   })
 
-  
   const getAuthHeader = () => {
     const token = localStorage.getItem('token')
     return{

@@ -78,6 +78,7 @@ const create = ({ db }) => async(req, res) => {
   }
 
   await db.insert(userToInsert).into('users')
+
   res.send(userToInsert)
 }
 

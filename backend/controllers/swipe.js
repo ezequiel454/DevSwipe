@@ -2,8 +2,8 @@ const swipe = require('@swp/swipe-sdk')
 
 const swp = swipe.init({
   apiKey: process.env.API_KEY,
-  secret: process.env.secret,
-  sandbox: process.env.sandbox
+  secret: process.env.SECRET,
+  sandbox: process.env.SANDBOX
 })
 
 const getOrganization = () => async (req, res) => {

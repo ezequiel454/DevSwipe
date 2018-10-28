@@ -17,7 +17,7 @@ export const getOrganizationSuccess = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     isLoading: false,
-    data: action.Organization
+    data: action.organization
   }
 }
 

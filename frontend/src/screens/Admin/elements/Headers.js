@@ -12,6 +12,8 @@ const Header = props => {
       <Menu.Item as={Link} to='/admin'>Home</Menu.Item>
       <Menu.Item as={Link} to='/admin/users'>Users</Menu.Item>
       <Menu.Item as={Link} to='/admin/runs'>Runs</Menu.Item>
+      <Menu.Item as={Link} to='/admin/organization'>Organization</Menu.Item>
+
       <Menu.Menu position='right'>
         <Dropdown item text={props.auth.user.name}>
           <Dropdown.Menu>
