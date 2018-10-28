@@ -32,7 +32,7 @@ export const getUserAccountFailure = (state = INITIAL_STATE) => {
     isLoading: false
   }
 }
-/*
+
 export const createUserAccountRequest = (state = INITIAL_STATE, action) => {
     return {
       ...state,
@@ -74,19 +74,19 @@ export const createUserAccountRequest = (state = INITIAL_STATE, action) => {
       isSaving: false,
       saved: false
     }
-  }*/
+  }
 
 export const HANDLERS = {
   [Types.GET_USER_ACCOUNT_REQUEST]: getUserAccountRequest,
   [Types.GET_USER_ACCOUNT_SUCCESS]: getUserAccountSuccess,
   [Types.GET_USER_ACCOUNT_FAILURE]: getUserAccountFailure,
 
-  /*
+  
   [Types.CREATE_USER_ACCOUNT_REQUEST]: createUserAccountRequest,
   [Types.CREATE_USER_ACCOUNT_SUCCESS]: createUserAccountSuccess,
   [Types.CREATE_USER_ACCOUNT_FAILURE]: createUserAccountFailure,
   [Types.CREATE_USER_ACCOUNT_RESET]: createUserAccountReset
-  */
+  
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

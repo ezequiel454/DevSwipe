@@ -6,7 +6,7 @@ import { getRuns, createRun, removeRun } from './runs'
 import { auth, login, destroyAuth, updateProfile, createProfile } from './auth'
 import { getUsers, removeUser, getUser, updateUser } from './users'
 import { loadOrganization } from './organization'
-import { loadUserAccount } from './account'
+import { loadUserAccount, createUserAccount } from './account'
 import Api from '../../service/Api'
 
 export default function * rootSaga () {
@@ -29,8 +29,10 @@ export default function * rootSaga () {
     takeLatest(Types.REMOVE_USER_REQUEST, removeUser({ api })),
     takeLatest(Types.GET_USER_REQUEST, getUser({ api })),
     takeLatest(Types.UPDATE_USER_REQUEST, updateUser({ api })),
+
     takeLatest(Types.GET_ORGANIZATION_REQUEST, loadOrganization({ api })),
     takeLatest(Types.GET_USER_ACCOUNT_REQUEST, loadUserAccount({ api })),
+    takeLatest(Types.CREATE_USER_ACCOUNT_REQUEST, createUserAccount({ api })),
 
     put(ActionCreators.authRequest())// start the aplication call
   ])

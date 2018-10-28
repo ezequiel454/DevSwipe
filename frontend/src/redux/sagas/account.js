@@ -9,3 +9,21 @@ export const loadUserAccount = ({ api }) => function* () {
     yield put(ActionCreators.getUserAccountFailure())
   }
 }
+
+export const createUserAccount = ({ api }) => function* (action){
+  const swipeAccount = yield call(api.createSwipeUser)
+  if(swipeAccount && swipeAccount.data.data.receipt.op_type === 'create_account'){
+    const account = {
+      account_id: swipeAccount.data.data.account.id,
+      user_id: action.userAccount,
+      balance: 0
+    }
+    const result = yield call(api.createUserAccount, account)
+    if(result){
+      yield put(ActionCreators.createUserAccountSuccess(account))
+    }
+  }else{
+    yield put(ActionCreators.createUserAccountFailure(swipeAccount.data.data.receipt.op_type))
+  }
+}
+

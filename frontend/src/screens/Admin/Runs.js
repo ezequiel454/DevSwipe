@@ -39,6 +39,7 @@ class Runs extends Component{
             <div>
                 <h1>Runs</h1>
                 <Button as={Link} to='/restrito/create-run'>New run</Button>
+                { !this.props.isSaving && JSON.stringify(this.props.account)}
                 { this.props.runs.isLoading && <p>Loading...</p>}
                 { !this.props.runs.isLoading && this.props.runs.data.length === 0 && <Segment color='blue'>No Data</Segment> }
                 { !this.props.runs.isLoading && this.props.runs.data.length > 0 && 
@@ -64,7 +65,8 @@ class Runs extends Component{
 const mapStateToProps = state => {
     return {
         runs: state.runs,
-        auth: state.auth
+        auth: state.auth,
+        account: state.account
     }
 }    
 
@@ -72,7 +74,8 @@ const mapDispatchToProps = dispatch => {
     return {
         load: () => dispatch(ActionCreators.getRunsRequest(true)),
         create: (run) => dispatch(ActionCreators.createRunRequest(run)),
-        remove: id => dispatch(ActionCreators.removeRunRequest(id))
+        remove: id => dispatch(ActionCreators.removeRunRequest(id)),
+        //createAccountUser: id => dispatch(ActionCreators.createUserAccountRequest(id))
     }
 }
   

@@ -77,9 +77,17 @@ const create = ({ db }) => async(req, res) => {
     return res.send({ error: true, message: 'email already taken.' })
   }
 
-  await db.insert(userToInsert).into('users')
+  const id = await db.insert(userToInsert).into('users')
 
-  res.send(userToInsert)
+  const userReturn = {
+    id: id,
+    name: userToInsert.name,
+    email: userToInsert.email,
+    passwd: userToInsert.passwd,
+    unit: userToInsert.unit,
+    timezone: userToInsert.timezone
+  }
+  res.send(userReturn)
 }
 
 const update = ({ db }) => async(req, res) => {

@@ -117,7 +117,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         save: (user) => dispatch(ActionCreators.createProfileRequest(user)),
-        reset: () => dispatch(ActionCreators.createProfileReset())
+        reset: () => dispatch(ActionCreators.createProfileReset()),
     }
 }
   

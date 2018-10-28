@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
 import LoaderElement from '../elements/LoaderElement'
-import { Label, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import Balance from '../elements/Balance'
 
 class Organization extends Component{   

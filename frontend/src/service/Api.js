@@ -35,6 +35,9 @@ const Api = base => {
 
     getOrganization: () => get(`/swipe/organizations`),
     getUserAccount: id => get(`/account/${id}`),
+    createUserAccount: data => create(`/account`, data),
+    createSwipeUser: () => create(`/swipe/accounts`)
+
   }
 }
 
