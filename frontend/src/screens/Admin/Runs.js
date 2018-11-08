@@ -65,8 +65,7 @@ class Runs extends Component{
 const mapStateToProps = state => {
     return {
         runs: state.runs,
-        auth: state.auth,
-        account: state.account
+        auth: state.auth
     }
 }    
 
@@ -74,8 +73,7 @@ const mapDispatchToProps = dispatch => {
     return {
         load: () => dispatch(ActionCreators.getRunsRequest(true)),
         create: (run) => dispatch(ActionCreators.createRunRequest(run)),
-        remove: id => dispatch(ActionCreators.removeRunRequest(id)),
-        //createAccountUser: id => dispatch(ActionCreators.createUserAccountRequest(id))
+        remove: id => dispatch(ActionCreators.removeRunRequest(id))
     }
 }
   
