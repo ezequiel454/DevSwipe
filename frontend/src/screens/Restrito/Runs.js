@@ -46,7 +46,7 @@ class Runs extends Component{
                         <Grid.Column>
                             <h1>Runs</h1>
                         </Grid.Column>
-                        <Grid.Column color='blue' style={{ width: '13%', height: 40, marginTop: '1px', marginLeft: '36%' }}>
+                        <Grid.Column color='teal' style={{ width: '13%', height: 40, marginTop: '1px', marginLeft: '36%', color:'blue' }}>
                             <Icon name='diamond'></Icon> {this.props.account.data.balance}
                         </Grid.Column>
                     </Grid.Row>

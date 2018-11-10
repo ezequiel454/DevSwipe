@@ -10,9 +10,10 @@ const getOrganization = () => async (req, res) => {
   await swp.getOrganization()
     .then(data => {
       const organization = {
-        id: data.organization.id,
-        valor: data.organization.balances[0].balance,
-        name: data.organization.name
+        id: data.receipt.id,
+        valor: data.value.balances[0].balance,
+        asset: data.value.balances[0].asset_id,
+        name: data.value.name
       }
       res.send({
         organization: organization
@@ -29,7 +30,7 @@ const getOrganization = () => async (req, res) => {
 const getAccounts = () => async (req, res) => {
   await swp.getAllAccounts()
   .then(data => {
-    const accounts = data.map(p => p.account)
+    const accounts = data.map(p => p.value)
     res.send({
       accounts: accounts
     })
@@ -47,7 +48,7 @@ const getAccount = () => async (req, res) => {
   await swp.getAccount(id)
   .then(data => {
     res.send({
-      account: data.account
+      account: data.value
     })
   })
   .catch(({data, error}) => {
@@ -61,7 +62,7 @@ const getAccount = () => async (req, res) => {
 const getAssets = () => async (req, res) => {
   await swp.getAllAssets()
     .then(data => {
-      const asset = data.map(p => p.asset)
+      const asset = data.map(p => p.value)
       res.send({
         asset: asset
       })
@@ -105,11 +106,11 @@ const createAccount = () => async(req, res) => {
   })
 }
 
-const createPayment = () => async(req, res) => {
-  await swp.makePayment(req.body)
+const createTransfer = () => async(req, res) => {
+  await swp.makeTransfer(req.body)
   .then(data => {
     res.send({
-      data: data.payment.operations //tratar so o op_code
+      data: data.value.operations[0] //tratar so o op_code
     })
   })
   .catch(({data, error}) => {
@@ -122,5 +123,5 @@ const createPayment = () => async(req, res) => {
 }
 
 module.exports = {
-  getOrganization, getAccounts, getAccount, getAssets, getPayment, createAccount, createPayment
+  getOrganization, getAccounts, getAccount, getAssets, getPayment, createAccount, createTransfer
 }

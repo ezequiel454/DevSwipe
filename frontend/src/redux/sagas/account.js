@@ -7,9 +7,9 @@ export const loadUserAccount = ({ api }) => function* () {
     yield put(ActionCreators.getUserAccountSuccess(user.data.account))
   }else{
     const swipeAccount = yield call(api.createSwipeUser)
-    if(swipeAccount.data.data.receipt.op_type === 'create_account'){
+    if(swipeAccount.data.data.receipt.type === 'CREATE_ACC'){
       const userToSave = {
-        id: swipeAccount.data.data.account.id
+        id: swipeAccount.data.data.value.id
       }
       yield call(api.createUserAccount, userToSave)
       user = yield call(api.getUserAccount, 'me')

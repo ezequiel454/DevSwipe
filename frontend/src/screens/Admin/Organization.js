@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
 import LoaderElement from '../elements/LoaderElement'
-import { Card } from 'semantic-ui-react'
-import Balance from '../elements/Balance'
+import { Card, Icon } from 'semantic-ui-react'
 
 class Organization extends Component{   
     componentDidMount(){
@@ -21,8 +20,10 @@ class Organization extends Component{
               <Card>
                 <Card.Content>
                   <Card.Header>Organization: {this.props.organization.data.name}</Card.Header>
-                  <Card.Description>
-                    <Balance value={this.props.organization.data.valor} unit='pt-BR' currency='BRL'/>
+                  <Card.Description style={{ marginTop: '10px', color: 'blue' }}>
+                      <div style={{backgroundColor: '#00B5AD', padding: 15}}>
+                        <Icon name='diamond'></Icon> {this.props.organization.data.valor}
+                      </div>
                   </Card.Description>
                 </Card.Content>
               </Card>

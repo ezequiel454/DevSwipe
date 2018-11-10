@@ -39,7 +39,6 @@ const initDB = async () => {
     })
   }
   const totalUsers = await knex('users').select(knex.raw('count(*) as total'))
-  
   if (totalUsers[0].total === 0) {
     await knex.insert({
       name: 'Tulio Faria',
@@ -58,6 +57,7 @@ const initDB = async () => {
       timezone: 'America/Sao_Paulo'
     }).into('users')
   }
+  /*
   const totalUserAccount = await knex('user_account').select(knex.raw('count(*) as total'))
   if (totalUserAccount[0].total === 0) {
     await knex.insert({
@@ -65,6 +65,7 @@ const initDB = async () => {
       account_id: '79933b0e0662dce11b8a35772d86fa707f12ea4a69a5d3ff9b69b64a3523b0d5'
     }).into('user_account')
   }
+  */
 }
 
 

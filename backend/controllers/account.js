@@ -12,8 +12,8 @@ const getMe = ({ db }) => async(req, res) => {
     await swp.getAccount(userDB[0].account_id)
     .then(data => {
       const account = {
-        id: data.account.id,
-        balance: data.account.balances[0].balance
+        id: data.value.id,
+        balance: data.value.balances[0].balance
       }
       res.send({
         account: account
