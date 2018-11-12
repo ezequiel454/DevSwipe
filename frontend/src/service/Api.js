@@ -37,6 +37,7 @@ const Api = base => {
     getUserAccount: id => get(`/account/${id}`),
     createUserAccount: data => create(`/account`, data),
     createSwipeUser: () => create(`/swipe/accounts`),
+    createTransfer: (data) => create(`/swipe/transfer`, data) 
   }
 }
 

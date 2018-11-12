@@ -5,7 +5,7 @@ import Home from './Home'
 import Runs from './Runs'
 import MyAccount from './MyAccount'
 import ChangePass from './ChangePass'
-
+import BalanceAccount from './BalanceAccount'
 
 import Header from './elements/Headers'
 import CreateRun from './CreateRun';
@@ -25,7 +25,7 @@ const Restrito = props => {
         <Route path={`${props.match.path}/my-account`} component={MyAccount} />
         <Route path={`${props.match.path}/change-pass`} component={ChangePass} />
         <Route path={`${props.match.path}/create-run`} component={CreateRun} />
-
+        <Route path={`${props.match.path}/my-balance`} component={BalanceAccount} />
     </div>
   )
 }

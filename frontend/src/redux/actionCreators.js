@@ -61,7 +61,11 @@ export const {
 
   getUserAccountRequest: null,
   getUserAccountSuccess: ['userAccount'],
-  getUserAccountFailure: null
+  getUserAccountFailure: null,
+
+  updateUserAccountRequest: ['userAccount'],
+  updateUserAccountSuccess: ['userAccount'],
+  updateUserAccountFailure: ['error']
   
 })
 export default Creators
