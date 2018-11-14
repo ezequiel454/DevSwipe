@@ -65,7 +65,9 @@ export const {
 
   updateUserAccountRequest: ['userAccount'],
   updateUserAccountSuccess: ['userAccount'],
-  updateUserAccountFailure: ['error']
+  updateUserAccountFailure: ['error'],
+  updateUserAccountReset: null,
+
   
 })
 export default Creators

@@ -5,7 +5,6 @@ const auth = require('./auth')
 const jwt = require('jsonwebtoken')
 const jwtSecret = 'DevPlenoRocks!'
 
-router.use(auth.checkJWT({ jwt, jwtSecret }))
 
 router.get('/organizations', controller.getOrganization())
 router.get('/accounts', controller.getAccounts())

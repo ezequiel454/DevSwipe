@@ -7,9 +7,9 @@ import { Button, Segment, Form } from 'semantic-ui-react'
 import InputMoment from 'input-moment'
 import 'input-moment/dist/input-moment.css'
 import moment from 'moment'
-//import { Redirect } from 'react-router-dom';
-//import momentTz from 'moment-timezone' 
 import { Link } from 'react-router-dom'
+
+import LoaderElement from '../elements/LoaderElement'
 
 function criarStadoInicial() {
     return {
@@ -17,7 +17,8 @@ function criarStadoInicial() {
         duration: 0,
         distance: 0,
         created: moment(),
-        error: ''
+        error: '',
+        loading: false
     }
 }
 
@@ -25,6 +26,8 @@ class CreateRun extends Component{
     state = criarStadoInicial()
     componentDidMount(){
         this.props.reset()
+        this.props.loadOrganization()
+        this.props.loadAccount()
     }
     handleChange = fieldname => event => {
         this.setState({
@@ -32,25 +35,37 @@ class CreateRun extends Component{
         })
     }
     handleCreateAnother = () => {
-        /*
-        this.state.friendly_name = ''
-        this.state.duration = 0
-        this.state.distance = 0
-        this.state.created = moment()
-        this.state.error = '' */
         this.setState(criarStadoInicial())
         this.props.reset()
     }
     handleSave = () => {
+        this.setState({
+            loading: true
+        })
         const d = moment.tz(this.state.created, this.props.auth.user.timezone)
         const d2 = d.clone().utc().format('YYYY-MM-DD H:mm:ss')
         const distance = this.state.distance
-        this.props.create({
-            friendly_name: this.state.friendly_name,
-            duration: this.state.duration,
-            distance: this.props.auth.user.unit === 'metric' ? distance : distance*1.634,
-            created: d2
-        })
+        
+        if(this.props.account.data.balance > 0){
+            const transfer = {
+                to: this.props.organization.data.id,
+                from: this.props.account.data.id,
+                asset: this.props.organization.data.asset,
+                amount: 1
+            }
+
+            const data = {
+                friendly_name: this.state.friendly_name,
+                duration: this.state.duration,
+                distance: this.props.auth.user.unit === 'metric' ? distance : distance*1.634,
+                created: d2
+            }
+            
+            this.props.create({
+                data: data,
+                transfer: transfer
+            })
+        }
     }
     render(){
         if(this.props.runs.saved){
@@ -68,6 +83,7 @@ class CreateRun extends Component{
         }
         return (
             <div>
+                { !this.props.runs.saved && this.state.loading && <LoaderElement /> }
                 <h1>Create Run</h1>
                 { !this.props.runs.saved && 
                     <Form>
@@ -104,14 +120,19 @@ class CreateRun extends Component{
 const mapStateToProps = state => {
     return {
         auth: state.auth,
-        runs: state.runs
+        runs: state.runs,
+        account: state.account,
+        organization: state.organization
     }
 }    
 
 const mapDispatchToProps = dispatch => {
     return {
         create: (run) => dispatch(ActionCreators.createRunRequest(run)),
-        reset: () => dispatch(ActionCreators.createRunReset())
+        reset: () => dispatch(ActionCreators.createRunReset()),
+        createTransfer: (userAccount) => dispatch(ActionCreators.updateUserAccountRequest(userAccount)),
+        loadAccount: () => dispatch(ActionCreators.getUserAccountRequest()),
+        loadOrganization: () => dispatch(ActionCreators.getOrganizationRequest()),
     }
 }
   

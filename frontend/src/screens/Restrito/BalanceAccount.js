@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
 
-import { Button, Card, Icon, Grid } from 'semantic-ui-react'
+import { Button, Card, Icon, Grid, Segment } from 'semantic-ui-react'
 
 import LoaderElement from '../elements/LoaderElement'
 
 class BalanceAccount extends Component{   
     componentDidMount(){
+        this.props.reset()
         this.props.loadOrganization()
         this.props.loadAccount()
     }
@@ -19,12 +20,29 @@ class BalanceAccount extends Component{
             amount: value
         }])
     }
+    handleReset = () => {
+        this.props.reset()
+        this.props.loadAccount()
+    }
     render(){
+        if(this.props.account.saved){
+            return(
+                <div>
+                    <div>
+                        <Segment color='green'>Created run with success!</Segment>
+                    </div>
+                    <div>
+                        <Button onClick={this.handleReset}>Back</Button>
+                    </div>
+                </div>
+            ) 
+        }
         return (
             <div>
                 { this.props.account.isLoading && <LoaderElement /> }
+                { this.props.account.isSaving && <LoaderElement /> }
                 { !this.props.account.isLoading 
-                && 
+                && !this.props.account.saved &&
                 <Grid>
                     <Grid.Row columns={1} style={{marginLeft: '1%', marginRight: '80%'}}>
                         <Grid.Column color='teal' style={{  marginTop: '1px', color:'blue' }}>
@@ -138,7 +156,9 @@ const mapDispatchToProps = dispatch => {
     return {
         loadAccount: () => dispatch(ActionCreators.getUserAccountRequest()),
         loadOrganization: () => dispatch(ActionCreators.getOrganizationRequest()),
-        createTransfer: (userAccount) => dispatch(ActionCreators.updateUserAccountRequest(userAccount))
+        createTransfer: (userAccount) => dispatch(ActionCreators.updateUserAccountRequest(userAccount)),
+        reset: () => dispatch(ActionCreators.updateUserAccountReset())
+
     }
 }
   

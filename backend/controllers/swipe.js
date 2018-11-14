@@ -10,7 +10,7 @@ const getOrganization = () => async (req, res) => {
   await swp.getOrganization()
     .then(data => {
       const organization = {
-        id: data.receipt.id,
+        id: data.value.id,
         valor: data.value.balances[0].balance,
         asset: data.value.balances[0].asset_id,
         name: data.value.name

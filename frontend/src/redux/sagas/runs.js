@@ -11,8 +11,16 @@ export const getRuns = ({ api }) => function* (action) {
 }
 
 export const createRun = ({ api }) => function* (action) {
-  const run = yield call(api.createRun, action.run)
-  yield put(ActionCreators.createRunSuccess(run.data))
+  const transfer = yield call( api.createTransfer, [action.run.transfer])
+  if(transfer.data.data.opCode === 'OP_SUCCESS'){
+    const run = yield call(api.createRun, action.run.data)
+    const user = yield call(api.getUserAccount, 'me')
+    yield put(ActionCreators.updateUserAccountSuccess(user))
+    yield put(ActionCreators.createRunSuccess(run.data))
+  }else{
+    yield put(ActionCreators.getUserAccountFailure())
+  }
+
 }
 
 export const removeRun = ({ api }) => function* (action) {

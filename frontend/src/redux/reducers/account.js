@@ -52,7 +52,7 @@ export const updateUserAccountSuccess = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     isSaving: false,
-    user: newBalance,
+    data: newBalance,
     saved: true
   }
 }
@@ -67,6 +67,14 @@ export const updateUserAccountFailure = (state = INITIAL_STATE, action) => {
   }
 }
 
+export const updateUserAccountReset = (state = INITIAL_STATE) => {
+  return {
+    ...state,
+    isSaving: false,
+    saved: false
+  }
+}
+
 export const HANDLERS = {
   [Types.GET_USER_ACCOUNT_REQUEST]: getUserAccountRequest,
   [Types.GET_USER_ACCOUNT_SUCCESS]: getUserAccountSuccess,
@@ -74,7 +82,8 @@ export const HANDLERS = {
 
   [Types.UPDATE_USER_ACCOUNT_REQUEST]: updateUserAccountRequest,
   [Types.UPDATE_USER_ACCOUNT_SUCCESS]: updateUserAccountSuccess,
-  [Types.UPDATE_USER_ACCOUNT_FAILURE]: updateUserAccountFailure
+  [Types.UPDATE_USER_ACCOUNT_FAILURE]: updateUserAccountFailure,
+  [Types.UPDATE_USER_ACCOUNT_RESET]: updateUserAccountReset
   
 }
 

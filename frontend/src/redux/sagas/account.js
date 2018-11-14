@@ -26,10 +26,8 @@ export const loadUserAccount = ({ api }) => function* () {
 
 export const updateAccountBalance = ({ api }) => function* (action){
   const transfer = yield call( api.createTransfer, action.userAccount)
-  console.log(transfer, 'transfer')
-  if(transfer.data.opCode === 'OP_SECCESS'){
+  if(transfer.data.data.opCode === 'OP_SUCCESS'){
     const user = yield call(api.getUserAccount, 'me')
-    console.log('aui', user)
     yield put(ActionCreators.updateUserAccountSuccess(user))
   }else{
     yield put(ActionCreators.getUserAccountFailure())
